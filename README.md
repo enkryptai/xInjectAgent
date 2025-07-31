@@ -49,6 +49,8 @@ python -m src.evaluate_prompted_agent \
 
 ---
 
+All options are (change model name changing MODEL_NAME)
+```bash
 usage: evaluate_prompted_agent.py [-h] [--model_type MODEL_TYPE] --model_name MODEL_NAME --setting {base,enhanced,tool,test,tech} --prompt_type {InjecAgent,hwchase17_react}
                                   [--only_first_step] [--use_cache] [--only_get_score]
 
@@ -65,3 +67,4 @@ options:
   --only_first_step     Only predict the first step
   --use_cache           Use existing dataset
   --only_get_score      Only get score without inference
+```
