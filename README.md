@@ -2,11 +2,6 @@
 
 `xInjectAgent` is a customized version of [InjecAgent](https://github.com/uiuc-kang-lab/InjecAgent) for generating attack prompts. 
 It provides an extensible framework to evaluate LLM agent robustness against tool-based indirect prompt injections, logic overrides, and complex chained attack scenarios.
-Sure! Here's the updated section with instructions to export the OpenAI API key—integrated seamlessly into the usage flow.
-
-You can insert this right before running the evaluation command:
-
----
 
 ## 🔐 Set Up OpenAI API Key
 
