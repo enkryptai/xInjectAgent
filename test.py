@@ -234,5 +234,5 @@ def inject_scenarios(json_input_path: str, json_output_path: str):
 
 # Run script
 if __name__ == "__main__":
-    inject_scenarios("/home/abhinav/Desktop/ML/work/InjecAgent/data/test_cases_ds_base.json", "ds_injected.json")
-    inject_scenarios("/home/abhinav/Desktop/ML/work/InjecAgent/data/test_cases_dh_base.json", "dh_injected.json")
+    inject_scenarios("/home/abhinav/Desktop/ML/work/InjecAgent/data/test_cases_ds_base.json", "ds_injected.json") # change ds_injected.json to data/test_cases_ds_test.json
+    inject_scenarios("/home/abhinav/Desktop/ML/work/InjecAgent/data/test_cases_dh_base.json", "dh_injected.json") # change ds_injected.json to data/test_cases_dh_test.json
