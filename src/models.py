@@ -74,30 +74,35 @@ class TogetherAIModel(BaseModel):
     def __init__(self, params):
         super().__init__()  
         
-        from src.prompts.prompt_template import PROMPT_TEMPLATE
-        
+        #from src.prompts.prompt_template import PROMPT_TEMPLATE
+        from together import Together
+        self.client = Together(
+            api_key = os.environ.get("TOGETHER_API_KEY"),
+        )
         self.params = params
         self.model = self.params['model_name']
-        self.prompt = PROMPT_TEMPLATE[self.model]
+        #self.prompt = PROMPT_TEMPLATE[self.model]
 
     def prepare_input(self, sys_prompt, user_prompt_filled):
-        model_input = self.prompt.format(sys_prompt = sys_prompt, user_prompt = user_prompt_filled)
+        model_input = [
+            {"role": "system", "content":sys_prompt},
+            {"role": "user", "content": user_prompt_filled}
+        ]
         return model_input
     
-    def call_model(self, model_input, retries=3, delay=2, max_tokens =512):
+    def call_model(self, model_input, retries=3, delay=2):
         attempt = 0
         while attempt < retries:
             try:
-                completion = together.Complete.create(
-                    model=self.model,
-                    prompt=model_input,
-                    max_tokens=max_tokens,
-                    temperature=0
-                )
-                return completion['choices'][0]['text']
+                response = self.client.chat.completions.create(
+    model= self.params['model_name'],
+    messages= model_input
+)
+                return response.choices[0].message.content
+            
             except Exception as e:
                 attempt += 1
-                max_tokens = max_tokens // 2
+                #max_tokens = max_tokens // 2
                 print(f"Attempt {attempt}: An error occurred - {e}")
                 if attempt < retries:
                     time.sleep(delay)  # Wait for a few seconds before retrying
